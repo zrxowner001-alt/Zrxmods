@@ -3,11 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta http-equiv="Content-Security-Policy" content="img-src * data: blob: https:;">
 <title>ZRX NEXORA PRO</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700;900&family=Exo+2:wght@700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{margin:0;background:transparent;height:100vh;overflow:hidden;color:#fff;font-family:'Rajdhani',sans-serif;}
+html{background:transparent !important;}
+body{margin:0;background:transparent !important;height:100vh;overflow:hidden;color:#fff;font-family:'Rajdhani',sans-serif;}
 
 /* ── WARN OVERLAY ── */
 #warnOverlay{position:fixed;inset:0;z-index:99999;background:rgba(3,2,0,.97);display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 22px;}
@@ -20,11 +22,11 @@ body{margin:0;background:transparent;height:100vh;overflow:hidden;color:#fff;fon
 #warnRegBtn:active{transform:scale(0.96) translateY(2px);}
 
 /* ── MINI LAUNCHER ── */
-#miniBtn{position:fixed;right:16px;bottom:100px;width:56px;height:56px;border-radius:14px;background:radial-gradient(circle at 35% 25%,#2a1c00,#0d0800);cursor:pointer;z-index:9998;display:flex !important;align-items:center;justify-content:center;touch-action:none;box-shadow:0 0 20px rgba(255,190,0,.8),0 0 40px rgba(255,130,0,.4),0 6px 16px rgba(0,0,0,.9);animation:btnFloat 3s ease-in-out infinite;}
+#miniBtn{position:fixed;right:16px;bottom:100px;width:56px;height:56px;border-radius:14px;background:radial-gradient(circle at 35% 25%,#2a1c00,#0d0800);cursor:pointer;z-index:999999;display:flex !important;align-items:center;justify-content:center;touch-action:none;box-shadow:0 0 20px rgba(255,190,0,.8),0 0 40px rgba(255,130,0,.4),0 6px 16px rgba(0,0,0,.9);animation:btnFloat 3s ease-in-out infinite;}
 #miniBtn::before{content:'';position:absolute;inset:-3px;border-radius:17px;border:2px dashed rgba(255,215,0,0.7);animation:spinOuter 5s linear infinite;}
 @keyframes spinOuter{100%{transform:rotate(360deg);}}
 @keyframes btnFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-#miniBtn img{width:44px;height:44px;border-radius:11px;object-fit:cover;display:block;position:relative;z-index:2;}
+#miniBtn img{width:44px;height:44px;border-radius:11px;object-fit:cover;display:block !important;position:relative;z-index:10;}
 .lb-dot{position:absolute;top:-2px;right:-2px;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle,#FFD700,#FF8C00);border:2px solid rgba(0,0,0,.9);animation:dotPulse .8s ease-in-out infinite;z-index:3;}
 @keyframes dotPulse{0%,100%{transform:scale(1);box-shadow:0 0 5px #FFD700;}50%{transform:scale(1.4);box-shadow:0 0 12px #FFD700;}}
 
@@ -161,7 +163,7 @@ body{margin:0;background:transparent;height:100vh;overflow:hidden;color:#fff;fon
 .scan-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,#FF6A00,#FFD700,#FFF8DC);border-radius:4px;transition:width .1s linear;}
 
 /* ── PREDICTION RESULT — NEW SPINNING NUMBER CIRCLE ── */
-#sv-result{display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%;position:relative;z-index:10;min-height:120px;}
+#sv-result{display:none;flex-direction:column;align-items:center;justify-content:center;gap:7px;width:100%;position:relative;z-index:10;}
 
 .pred-main-box{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;}
 
@@ -181,7 +183,7 @@ body{margin:0;background:transparent;height:100vh;overflow:hidden;color:#fff;fon
 /* tick marks on the outer ring */
 .spinner-tick{position:absolute;width:2px;height:5px;background:#FFD700;border-radius:1px;transform-origin:1px 32px;opacity:0.6;}
 .num-circle-bg{position:absolute;inset:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,240,150,0.18),rgba(30,18,0,0.9));border:1px solid rgba(255,215,0,0.35);}
-.res-num-img{width:80px;height:80px;object-fit:contain;display:block;position:relative;z-index:2; filter:none !important;border-radius:8px;box-shadow:0 0 20px rgba(0,212,255,0.4), 0 0 40px rgba(123,59,255,0.2);}
+.res-num-img{width:32px;height:auto;object-fit:contain;display:block;position:relative;z-index:2; filter:none !important;}
 
 .pred-seq-badge{display:flex;align-items:center;gap:5px;font-family:'Orbitron',sans-serif;font-size:7px;font-weight:900;letter-spacing:2px;padding:2px 8px;border-radius:20px;background:rgba(0,255,255,0.07);border:1px solid rgba(0,255,255,0.4);color:#00FFFF;box-shadow:0 0 8px rgba(0,255,255,0.2);}
 .pred-seq-dot{width:4px;height:4px;border-radius:50%;background:#00FFFF;box-shadow:0 0 5px #00FFFF;animation:dotPulse 1s ease-in-out infinite;}
@@ -272,7 +274,7 @@ body{margin:0;background:transparent;height:100vh;overflow:hidden;color:#fff;fon
 </div>
 
 <div id="miniBtn">
-  <img id="miniIconImg" src="" onerror="this.style.display='none'">
+  <img id="miniIconImg" src="" alt="mini" style="display:block !important;">
   <div class="lb-dot"></div>
 </div>
 
@@ -375,7 +377,7 @@ body{margin:0;background:transparent;height:100vh;overflow:hidden;color:#fff;fon
               <div class="spinner-ring sr2"></div>
               <div class="spinner-ring sr3"></div>
               <div class="num-circle-bg"></div>
-              <img id="resNumberImg" class="res-num-img" src="" alt="num" onerror="this.style.display='none'">
+              <img id="resNumberImg" class="res-num-img" src="7.png" alt="num" onerror="this.style.display='none'">
             </div>
           </div>
           <div class="pred-seq-badge">
@@ -723,78 +725,134 @@ var balls=[
   {img:"https://i.ibb.co/zHDjj6v4/num-8.png"},
   {img:"https://i.ibb.co/SXwd01w9/num-9.png"}
 ];
-var miniIconUrl="https://i.ibb.co/N60NH9r0/Picsart-26-06-10-23-40-26-431.jpg"; /* ACTUAL WORKING Mini icon */
+var miniIconUrl="https://i.ibb.co/N60NH9r0/Picsart-26-06-10-23-40-26-431.jpg?v=" + Date.now(); /* Mini icon */
 
 function renderResult(pred){
   var el=document.getElementById('resBigSmall');
-  var imgEl = document.getElementById('resNumberImg');
-  var svResult = document.getElementById('sv-result');
-  
-  /* Set up side-by-side layout like Dragon */
-  if(svResult) {
-    svResult.style.flexDirection='row';
-    svResult.style.gap='12px';
-    svResult.style.alignItems='center';
-    svResult.style.justifyContent='center';
-  }
-  
-  var numIdx=parseInt(pred.n)||0;
-  if(numIdx>=0&&numIdx<balls.length){
-    imgEl.src=balls[numIdx].img;
-    imgEl.style.display='block';
-    imgEl.style.width='80px';
-    imgEl.style.height='80px';
-    imgEl.style.objectFit='contain';
-    imgEl.style.borderRadius='8px';
-    console.log('✅ Loading ball image:', balls[numIdx].img);
-  } else {
-    imgEl.src="";
-    imgEl.style.display='none';
-  }
-  
   el.textContent=pred.s;
   el.className='pred-bigsmall '+(pred.s==='BIG'?'is-big':'is-small');
-  el.style.fontSize='28px';
-  el.style.fontWeight='700';
-  el.style.minWidth='60px';
-  
+  var numIdx=parseInt(pred.n)||0;
+  if(numIdx>=0&&numIdx<balls.length){
+    document.getElementById('resNumberImg').src=balls[numIdx].img;  /* Direct complete URL */
+    document.getElementById('resNumberImg').style.display='block';
+    console.log('Loading ball image:', balls[numIdx].img);
+  } else {
+    document.getElementById('resNumberImg').src="";
+    document.getElementById('resNumberImg').style.display='none';
+  }
   if(lastPeriod)document.getElementById('resSeqVal').textContent=lastPeriod.slice(-4);
 }
 
 /* ── SCAN ANIMATION ── */
 var SCAN_STAGES=["INIT...","SYNCING...","ROUTING...","TRACING...","LOCKING...","BYPASS...","MASKING...","INJECTING...","VERIFYING...","DECRYPTING...","CRACKING...","✦ LOCKED! ✦"];
 function runBypass(){
-  if(bypassRunning)return;bypassRunning=true;
+  if(bypassRunning){
+    console.warn('Bypass already running');
+    return;
+  }
+  
+  bypassRunning=true;
   var useSamePred=(lockedPeriod&&lockedPeriod===lastPeriod&&lockedPrediction)?lockedPrediction:null;
-  document.getElementById('injector-container').classList.add('is-bypassing');
-  setShell('st-live');setBadge('⚡ LIVE','b-live');showOnly('sv-scan');setTri(true);
-  document.getElementById('scanStageLabel').textContent='INITIALIZING...';
-  document.getElementById('scanProgressBar').style.width='0%';
+  
+  // Ensure all elements exist
+  var container=document.getElementById('injector-container');
+  var scanLabel=document.getElementById('scanStageLabel');
+  var scanBar=document.getElementById('scanProgressBar');
+  
+  if(!container || !scanLabel || !scanBar){
+    console.error('Required elements missing');
+    bypassRunning=false;
+    return;
+  }
+  
+  container.classList.add('is-bypassing');
+  setShell('st-live');
+  setBadge('⚡ LIVE','b-live');
+  showOnly('sv-scan');
+  setTri(true);
+  scanLabel.textContent='INITIALIZING...';
+  scanBar.style.width='0%';
   showBtn('btn-scan-area');
+  
   var pct=0;
+  var startTime=Date.now();
+  var TOTAL_DURATION=5500; // 5.5 second full animation
+  var animationComplete=false;
+  
   var iv=setInterval(function(){
-    pct=Math.min(100,pct+Math.floor(2+Math.random()*6));
-    document.getElementById('scanProgressBar').style.width=pct+'%';
-    var si=Math.min(SCAN_STAGES.length-1,Math.floor((pct/100)*(SCAN_STAGES.length-1)));
-    document.getElementById('scanStageLabel').textContent=SCAN_STAGES[si];
-    if(pct>=100){
-      clearInterval(iv);bypassRunning=false;wingoHackDone=true;
-      document.getElementById('injector-container').classList.remove('is-bypassing');
-      var finalPred;
-      if(useSamePred){finalPred=useSamePred;}
-      else{
-        var LOGIC={0:{n:'5',s:'BIG'},1:{n:'2',s:'SMALL'},2:{n:'4',s:'SMALL'},3:{n:'7',s:'BIG'},4:{n:'8',s:'BIG'},5:{n:'9',s:'BIG'},6:{n:'0',s:'SMALL'},7:{n:'3',s:'SMALL'},8:{n:'6',s:'BIG'},9:{n:'1',s:'SMALL'}};
-        var lg=predData||LOGIC[Math.floor(Math.random()*10)];if(!predData)predData=lg;finalPred=lg;lockedPeriod=lastPeriod;lockedPrediction=finalPred;
-      }
-      curState='wingo';updateUI();
-      playAudio(finalPred.s==='BIG'?'big.mp3':'small.mp3');
-      try{ZAYRO.speak(finalPred.s+' '+finalPred.n);}catch(e){}
-      setTimeout(fetchPeriod,200);
+    if(animationComplete){
+      clearInterval(iv);
+      return;
     }
-  },85);
+    
+    var elapsed=Date.now()-startTime;
+    pct=Math.min(100,Math.floor((elapsed/TOTAL_DURATION)*100));
+    
+    // Add tiny randomness to look natural
+    if(pct<95){
+      pct=Math.min(100,pct+Math.floor(Math.random()*2));
+    }
+    
+    scanBar.style.width=pct+'%';
+    var si=Math.min(SCAN_STAGES.length-1,Math.floor((pct/100)*(SCAN_STAGES.length-1)));
+    scanLabel.textContent=SCAN_STAGES[si];
+    
+    console.log('Animation progress: '+pct+'%');
+    
+    if(pct>=100 || elapsed>=TOTAL_DURATION){
+      animationComplete=true;
+      clearInterval(iv);
+      scanBar.style.width='100%';
+      scanLabel.textContent=SCAN_STAGES[SCAN_STAGES.length-1];
+      console.log('Scan animation complete, showing result in 300ms');
+      
+      // Delay before showing result
+      setTimeout(function(){
+        bypassRunning=false;
+        wingoHackDone=true;
+        container.classList.remove('is-bypassing');
+        
+        var finalPred;
+        if(useSamePred){
+          finalPred=useSamePred;
+        } else {
+          var LOGIC={0:{n:'5',s:'BIG'},1:{n:'2',s:'SMALL'},2:{n:'4',s:'SMALL'},3:{n:'7',s:'BIG'},4:{n:'8',s:'BIG'},5:{n:'9',s:'BIG'},6:{n:'0',s:'SMALL'},7:{n:'3',s:'SMALL'},8:{n:'6',s:'BIG'},9:{n:'1',s:'SMALL'}};
+          var lg=predData||LOGIC[Math.floor(Math.random()*10)];
+          if(!predData)predData=lg;
+          finalPred=lg;
+          lockedPeriod=lastPeriod;
+          lockedPrediction=finalPred;
+        }
+        
+        curState='wingo';
+        updateUI();
+        console.log('Showing result: '+finalPred.s+' '+finalPred.n);
+        playAudio(finalPred.s==='BIG'?'big.mp3':'small.mp3');
+        try{ZAYRO.speak(finalPred.s+' '+finalPred.n);}catch(e){}
+        setTimeout(fetchPeriod,200);
+      }, 300);
+    }
+  }, 50); // Update every 50ms for smooth animation
 }
 
-document.getElementById('btnAnalyze').addEventListener('click',function(){wingoHackDone=false;lockedPrediction=null;lockedPeriod=null;runBypass();});
+document.getElementById('btnAnalyze').addEventListener('click',function(){
+  console.log('Analyze button clicked - Starting bypass animation');
+  if(bypassRunning){
+    console.warn('Bypass already running, ignoring click');
+    return;
+  }
+  wingoHackDone=false;
+  lockedPrediction=null;
+  lockedPeriod=null;
+  // Ensure all elements exist before running
+  var scanLabel=document.getElementById('scanStageLabel');
+  var scanBar=document.getElementById('scanProgressBar');
+  if(scanLabel && scanBar){
+    runBypass();
+  } else {
+    console.error('Scan elements not found');
+  }
+});
 document.getElementById('hideBtnResult').addEventListener('click',closePanel);
 document.getElementById('hideBtnScan').addEventListener('click',closePanel);
 document.getElementById('hideBtnAuth').addEventListener('click',closePanel);
@@ -881,17 +939,18 @@ window.onload=function(){
     miniBtn.style.display = 'flex';
     console.log('Mini button forced to display');
   }
-  /* Load mini icon from direct URL */
+  /* Load mini icon from direct URL with fallback */
   var miniIconImg = document.getElementById('miniIconImg');
   if(miniIconImg) {
     if(miniIconUrl) {
       miniIconImg.src = miniIconUrl;
-      console.log('✅ Mini icon loaded from URL:', miniIconUrl);
+      console.log('✅ Mini icon loading from URL:', miniIconUrl);
       miniIconImg.onerror = function() {
-        console.error('❌ Mini icon failed to load from:', miniIconUrl);
+        console.warn('⚠️ Mini icon ImgBB failed, using fallback SVG');
+        miniIconImg.src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 44 44%22%3E%3Crect width=%2244%22 height=%2244%22 fill=%22%23FFD700%22/%3E%3Ccircle cx=%2222%22 cy=%2222%22 r=%2215%22 fill=%22%23ff6600%22/%3E%3C/svg%3E';
       };
       miniIconImg.onload = function() {
-        console.log('✅ Mini icon successfully loaded!');
+        console.log('✅ Mini icon loaded successfully');
       };
     } else {
       console.warn('⚠️ miniIconUrl not defined');
