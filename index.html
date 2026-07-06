@@ -161,7 +161,7 @@ body{margin:0;background:transparent;height:100vh;overflow:hidden;color:#fff;fon
 .scan-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,#FF6A00,#FFD700,#FFF8DC);border-radius:4px;transition:width .1s linear;}
 
 /* ── PREDICTION RESULT — NEW SPINNING NUMBER CIRCLE ── */
-#sv-result{display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%;position:relative;z-index:10;min-height:120px;}
+#sv-result{display:none;flex-direction:column;align-items:center;justify-content:center;gap:7px;width:100%;position:relative;z-index:10;}
 
 .pred-main-box{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;}
 
@@ -181,7 +181,7 @@ body{margin:0;background:transparent;height:100vh;overflow:hidden;color:#fff;fon
 /* tick marks on the outer ring */
 .spinner-tick{position:absolute;width:2px;height:5px;background:#FFD700;border-radius:1px;transform-origin:1px 32px;opacity:0.6;}
 .num-circle-bg{position:absolute;inset:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,240,150,0.18),rgba(30,18,0,0.9));border:1px solid rgba(255,215,0,0.35);}
-.res-num-img{width:80px;height:80px;object-fit:contain;display:block;position:relative;z-index:2; filter:none !important;border-radius:8px;box-shadow:0 0 20px rgba(0,212,255,0.4), 0 0 40px rgba(123,59,255,0.2);}
+.res-num-img{width:32px;height:auto;object-fit:contain;display:block;position:relative;z-index:2; filter:none !important;}
 
 .pred-seq-badge{display:flex;align-items:center;gap:5px;font-family:'Orbitron',sans-serif;font-size:7px;font-weight:900;letter-spacing:2px;padding:2px 8px;border-radius:20px;background:rgba(0,255,255,0.07);border:1px solid rgba(0,255,255,0.4);color:#00FFFF;box-shadow:0 0 8px rgba(0,255,255,0.2);}
 .pred-seq-dot{width:4px;height:4px;border-radius:50%;background:#00FFFF;box-shadow:0 0 5px #00FFFF;animation:dotPulse 1s ease-in-out infinite;}
@@ -375,7 +375,7 @@ body{margin:0;background:transparent;height:100vh;overflow:hidden;color:#fff;fon
               <div class="spinner-ring sr2"></div>
               <div class="spinner-ring sr3"></div>
               <div class="num-circle-bg"></div>
-              <img id="resNumberImg" class="res-num-img" src="" alt="num" onerror="this.style.display='none'">
+              <img id="resNumberImg" class="res-num-img" src="7.png" alt="num" onerror="this.style.display='none'">
             </div>
           </div>
           <div class="pred-seq-badge">
@@ -710,54 +710,22 @@ function updateUI(){
   }
 }
 
-/* ── BALL LOADING SYSTEM (from NEXON) - ACTUAL WORKING URLs ── */
-var balls=[
-  {img:"https://i.ibb.co/zTqVhNm3/num-0.png"},
-  {img:"https://i.ibb.co/rKF3NVcK/num-1.png"},
-  {img:"https://i.ibb.co/DPt33g7S/num-2.png"},
-  {img:"https://i.ibb.co/chv1dYvJ/num-3.png"},
-  {img:"https://i.ibb.co/7xnpHkmD/num-4.png"},
-  {img:"https://i.ibb.co/B5mT5NjL/num-5.png"},
-  {img:"https://i.ibb.co/DH2YsSTC/num-6.png"},
-  {img:"https://i.ibb.co/9mmP3W3M/num-7.png"},
-  {img:"https://i.ibb.co/zHDjj6v4/num-8.png"},
-  {img:"https://i.ibb.co/SXwd01w9/num-9.png"}
-];
-var miniIconUrl="https://i.ibb.co/N60NH9r0/Picsart-26-06-10-23-40-26-431.jpg"; /* ACTUAL WORKING Mini icon */
+/* ── BALL LOADING SYSTEM (from NEXON) ── */
+var balls=[{img:"ball0.jpg"},{img:"ball1.jpg"},{img:"ball2.jpg"},{img:"ball3.jpg"},{img:"ball4.jpg"},{img:"ball5.jpg"},{img:"ball6.jpg"},{img:"ball7.jpg"},{img:"ball8.jpg"},{img:"ball9.jpg"}];
+var baseUrl="https://i.ibb.co/"; /* URL base for direct fetch - modify as needed */
+var miniIconUrl="https://i.ibb.co/your-icon-id/icon.png"; /* Direct URL for mini icon */
 
 function renderResult(pred){
   var el=document.getElementById('resBigSmall');
-  var imgEl = document.getElementById('resNumberImg');
-  var svResult = document.getElementById('sv-result');
-  
-  /* Set up side-by-side layout like Dragon */
-  if(svResult) {
-    svResult.style.flexDirection='row';
-    svResult.style.gap='12px';
-    svResult.style.alignItems='center';
-    svResult.style.justifyContent='center';
-  }
-  
-  var numIdx=parseInt(pred.n)||0;
-  if(numIdx>=0&&numIdx<balls.length){
-    imgEl.src=balls[numIdx].img;
-    imgEl.style.display='block';
-    imgEl.style.width='80px';
-    imgEl.style.height='80px';
-    imgEl.style.objectFit='contain';
-    imgEl.style.borderRadius='8px';
-    console.log('✅ Loading ball image:', balls[numIdx].img);
-  } else {
-    imgEl.src="";
-    imgEl.style.display='none';
-  }
-  
   el.textContent=pred.s;
   el.className='pred-bigsmall '+(pred.s==='BIG'?'is-big':'is-small');
-  el.style.fontSize='28px';
-  el.style.fontWeight='700';
-  el.style.minWidth='60px';
-  
+  var numIdx=parseInt(pred.n)||0;
+  if(numIdx>=0&&numIdx<balls.length){
+    document.getElementById('resNumberImg').src=baseUrl+balls[numIdx].img;
+  } else {
+    document.getElementById('resNumberImg').src="";
+  }
+  document.getElementById('resNumberImg').style.display='block';
   if(lastPeriod)document.getElementById('resSeqVal').textContent=lastPeriod.slice(-4);
 }
 
@@ -883,21 +851,9 @@ window.onload=function(){
   }
   /* Load mini icon from direct URL */
   var miniIconImg = document.getElementById('miniIconImg');
-  if(miniIconImg) {
-    if(miniIconUrl) {
-      miniIconImg.src = miniIconUrl;
-      console.log('✅ Mini icon loaded from URL:', miniIconUrl);
-      miniIconImg.onerror = function() {
-        console.error('❌ Mini icon failed to load from:', miniIconUrl);
-      };
-      miniIconImg.onload = function() {
-        console.log('✅ Mini icon successfully loaded!');
-      };
-    } else {
-      console.warn('⚠️ miniIconUrl not defined');
-    }
-  } else {
-    console.error('❌ miniIconImg element not found');
+  if(miniIconImg && miniIconUrl) {
+    miniIconImg.src = miniIconUrl;
+    console.log('Mini icon loaded from URL:', miniIconUrl);
   }
   console.log('Calling _goState(wait)');
   _goState('wait');
